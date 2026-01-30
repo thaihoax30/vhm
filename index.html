@@ -2,80 +2,76 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Khảo Sát Góp Ý Tiệc Tất Niên</title>
+    <title>Khảo sát VHM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         :root {
-            --red-main: #8b0000;
-            --dark-main: #111;
-            --white-main: #ffffff;
+            --red-main: #b30000;
+            --dark-bg: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --text-main: #f2f2f2;
+            --text-sub: #b5b5b5;
         }
 
-        /* ẨN NỘI DUNG BAN ĐẦU – KHÔNG LÀM VỠ LAYOUT */
         body {
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(180deg, #7a0000, #4d0000);
+            background: radial-gradient(circle at top, #2a0000, #0a0a0a);
             min-height: 100vh;
-
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .wrapper {
-            background: var(--white-main);
+            background: var(--card-bg);
             width: 90%;
             max-width: 420px;
-            padding: 32px 24px;
-            border-radius: 14px;
+            padding: 34px 26px;
+            border-radius: 16px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 0 40px rgba(179, 0, 0, 0.25);
         }
 
+        /* LOGO PHÁT SÁNG */
         .logo img {
-        max-width: 140px;
-        width: 100%;
-        height: auto;
-        margin-bottom: 16px;
-        }
-        
-        @media (max-width: 480px) {
-            .logo img {
-                max-width: 110px;
-            }
+            max-width: 110px;
+            margin-bottom: 20px;
+
+            filter:
+                drop-shadow(0 0 6px rgba(179, 0, 0, 0.6))
+                drop-shadow(0 0 14px rgba(179, 0, 0, 0.45))
+                drop-shadow(0 0 28px rgba(179, 0, 0, 0.25));
         }
 
         h1 {
             color: var(--red-main);
-            font-size: 20px;
-            margin-bottom: 16px;
+            font-size: 18px;
+            margin-bottom: 14px;
             text-transform: uppercase;
             line-height: 1.4;
+            letter-spacing: 0.5px;
         }
 
         .info-text {
-            font-size: 15px;
-            color: #333;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            font-size: 14.5px;
+            color: var(--text-sub);
+            margin-bottom: 22px;
+            line-height: 1.6;
         }
 
         .timer-box {
-            background: #f5f5f5;
-            border-radius: 10px;
-            padding: 16px 12px;
+            background: #111;
+            border-radius: 12px;
+            padding: 18px 12px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
         .timer-label {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 8px;
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 10px;
         }
 
         .timer {
@@ -89,14 +85,14 @@
         }
 
         .time-value {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
-            color: var(--red-main);
+            color: var(--text-main);
         }
 
         .time-text {
-            font-size: 12px;
-            color: #666;
+            font-size: 11px;
+            color: #888;
         }
 
         @media (max-width: 480px) {
@@ -105,23 +101,6 @@
             }
         }
     </style>
-
-    <!-- KIỂM TRA THỜI GIAN TRƯỚC KHI HIỂN THỊ -->
-    <script>
-        const TARGET_TIME = new Date("2026-01-31T21:00:00.000+07:00").getTime();
-        const REDIRECT_URL = "http://google.com";
-
-        if (Date.now() >= TARGET_TIME) {
-            // ĐÃ QUÁ GIỜ → CHUYỂN NGAY, KHÔNG RENDER UI
-            window.location.replace(REDIRECT_URL);
-        } else {
-            // CHƯA TỚI GIỜ → CHO PHÉP HIỂN THỊ
-            document.addEventListener("DOMContentLoaded", () => {
-                document.body.style.visibility = "visible";
-                document.body.style.opacity = "1";
-            });
-        }
-    </script>
 </head>
 
 <body>
@@ -162,6 +141,9 @@
 </div>
 
 <script>
+    const TARGET_TIME = new Date("2026-01-31T21:00:00+07:00").getTime();
+    const REDIRECT_URL = "http://google.com";
+
     function updateTimer() {
         const diff = TARGET_TIME - Date.now();
 
@@ -172,13 +154,10 @@
 
         document.getElementById("hours").textContent =
             String(Math.floor(diff / 3600000)).padStart(2, "0");
-
         document.getElementById("minutes").textContent =
             String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
-
         document.getElementById("seconds").textContent =
             String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
-
         document.getElementById("centiseconds").textContent =
             String(Math.floor((diff % 1000) / 10)).padStart(2, "0");
     }
@@ -189,5 +168,3 @@
 
 </body>
 </html>
-
-
