@@ -7,18 +7,22 @@
 
     <style>
         :root {
-            --red-main: #b30000;
-            --dark-bg: #0f0f0f;
-            --card-bg: #1a1a1a;
-            --text-main: #f2f2f2;
-            --text-sub: #b5b5b5;
+            --bg-main: #0b0f14;
+            --card-bg: #121821;
+            --border-soft: rgba(255,255,255,0.06);
+            --text-main: #e6eaf0;
+            --text-sub: #9aa4b2;
+
+            --led-blue: #00bfff;
         }
 
+        /* FULL DARK BACKGROUND */
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: radial-gradient(circle at top, #2a0000, #0a0a0a);
+            background: var(--bg-main);
             min-height: 100vh;
+
             display: flex;
             align-items: center;
             justify-content: center;
@@ -31,46 +35,48 @@
             padding: 34px 26px;
             border-radius: 16px;
             text-align: center;
-            box-shadow: 0 0 40px rgba(179, 0, 0, 0.25);
+
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 0 30px rgba(0,0,0,0.6);
         }
 
-        /* LOGO PHÁT SÁNG */
+        /* LOGO LED XANH */
         .logo img {
             max-width: 110px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
 
             filter:
-                drop-shadow(0 0 6px rgba(179, 0, 0, 0.6))
-                drop-shadow(0 0 14px rgba(179, 0, 0, 0.45))
-                drop-shadow(0 0 28px rgba(179, 0, 0, 0.25));
+                drop-shadow(0 0 6px rgba(0,191,255,0.8))
+                drop-shadow(0 0 14px rgba(0,191,255,0.6))
+                drop-shadow(0 0 28px rgba(0,191,255,0.4));
         }
 
         h1 {
-            color: var(--red-main);
-            font-size: 18px;
+            color: var(--text-main);
+            font-size: 17px;
             margin-bottom: 14px;
             text-transform: uppercase;
-            line-height: 1.4;
-            letter-spacing: 0.5px;
+            line-height: 1.45;
+            letter-spacing: 0.6px;
         }
 
         .info-text {
             font-size: 14.5px;
             color: var(--text-sub);
-            margin-bottom: 22px;
+            margin-bottom: 24px;
             line-height: 1.6;
         }
 
         .timer-box {
-            background: #111;
+            background: #0f141c;
             border-radius: 12px;
             padding: 18px 12px;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid var(--border-soft);
         }
 
         .timer-label {
             font-size: 13px;
-            color: #aaa;
+            color: #8b95a5;
             margin-bottom: 10px;
         }
 
@@ -92,7 +98,7 @@
 
         .time-text {
             font-size: 11px;
-            color: #888;
+            color: #7f8896;
         }
 
         @media (max-width: 480px) {
@@ -110,10 +116,10 @@
         <img src="logo.png" alt="VHM Logo">
     </div>
 
-    <h1>KHẢO SÁT GÓP Ý TIỆC TẤT NIÊN</h1>
+    <h1>KHẢO SÁT GÓP Ý THỰC ĐƠN TIỆC TẤT NIÊN</h1>
 
     <div class="info-text">
-        Thời gian thực hiện khảo sát sau 21:00, anh/chị vui thực hiện khảo sát sau thời gian này.
+        Kính mong Anh/Chị vui lòng chờ đến thời điểm khảo sát được mở để tiếp tục thực hiện.
     </div>
 
     <div class="timer-box">
