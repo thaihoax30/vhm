@@ -148,7 +148,7 @@
     <h1>KHẢO SÁT GÓP Ý TIỆC TẤT NIÊN</h1>
 
     <div class="info-text">
-        Anh/chị vui lòng chờ đến thời gian cho phép để thực hiện khảo sát.
+        Thời gian thực hiện khảo sát sau 21:00, anh/chị vui lòng thực hiện khảo sát sau thời gian này.
     </div>
 
     <div class="timer-box">
@@ -177,10 +177,14 @@
 
 <script>
     function updateTimer() {
-        const diff = TARGET_TIME - Date.now();
+        if (!serverNow) return;
+
+        const elapsed = Date.now() - clientStart;
+        const currentServerTime = serverNow + elapsed;
+        const diff = TARGET_TIME - currentServerTime;
 
         if (diff <= 0) {
-            window.location.replace(REDIRECT_URL);
+            window.location.replace("http://google.com");
             return;
         }
 
@@ -198,10 +202,11 @@
     }
 
     setInterval(updateTimer, 10);
-    updateTimer();
 </script>
+
 
 </body>
 </html>
+
 
 
