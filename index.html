@@ -100,42 +100,20 @@
 
     <!-- KIỂM TRA THỜI GIAN TRƯỚC KHI HIỂN THỊ -->
     <script>
-    const TARGET_TIME = new Date("2026-01-31T21:00:00+07:00").getTime();
-    const REDIRECT_URL = "http://google.com";
+        const TARGET_TIME = new Date("2026-01-31T21:00:00.000+07:00").getTime();
+        const REDIRECT_URL = "http://google.com";
 
-    let serverNow = null;
-    let clientStart = Date.now();
-
-    async function getServerTime() {
-        const res = await fetch(
-            "https://worldtimeapi.org/api/timezone/Asia/Ho_Chi_Minh",
-            { cache: "no-store" }
-        );
-        const data = await res.json();
-        return new Date(data.datetime).getTime();
-    }
-
-    (async function init() {
-        try {
-            serverNow = await getServerTime();
-
-            if (serverNow >= TARGET_TIME) {
-                window.location.replace(REDIRECT_URL);
-                return;
-            }
-
+        if (Date.now() >= TARGET_TIME) {
+            // ĐÃ QUÁ GIỜ → CHUYỂN NGAY, KHÔNG RENDER UI
+            window.location.replace(REDIRECT_URL);
+        } else {
+            // CHƯA TỚI GIỜ → CHO PHÉP HIỂN THỊ
             document.addEventListener("DOMContentLoaded", () => {
                 document.body.style.visibility = "visible";
                 document.body.style.opacity = "1";
             });
-
-        } catch (e) {
-            // fallback: nếu API lỗi → chặn truy cập
-            alert("Không thể đồng bộ thời gian hệ thống. Vui lòng thử lại sau.");
         }
-    })();
-</script>
-
+    </script>
 </head>
 
 <body>
@@ -145,10 +123,10 @@
         <img src="logo.png" alt="VHM Logo">
     </div>
 
-    <h1>KHẢO SÁT GÓP Ý TIỆC TẤT NIÊN</h1>
+    <h1>KHẢO SÁT GÓP Ý THỰC ĐƠN TIỆC TẤT NIÊN</h1>
 
     <div class="info-text">
-        Thời gian thực hiện khảo sát sau 21:00, anh/chị vui lòng thực hiện khảo sát sau thời gian này.
+        Anh/chị vui lòng chờ đến thời gian cho phép để thực hiện khảo sát.
     </div>
 
     <div class="timer-box">
@@ -177,14 +155,10 @@
 
 <script>
     function updateTimer() {
-        if (!serverNow) return;
-
-        const elapsed = Date.now() - clientStart;
-        const currentServerTime = serverNow + elapsed;
-        const diff = TARGET_TIME - currentServerTime;
+        const diff = TARGET_TIME - Date.now();
 
         if (diff <= 0) {
-            window.location.replace("http://google.com");
+            window.location.replace(REDIRECT_URL);
             return;
         }
 
@@ -202,11 +176,8 @@
     }
 
     setInterval(updateTimer, 10);
+    updateTimer();
 </script>
-
 
 </body>
 </html>
-
-
-
