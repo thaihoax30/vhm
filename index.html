@@ -100,20 +100,42 @@
 
     <!-- KIỂM TRA THỜI GIAN TRƯỚC KHI HIỂN THỊ -->
     <script>
-        const TARGET_TIME = new Date("2026-01-31T21:00:00.000+07:00").getTime();
-        const REDIRECT_URL = "http://google.com";
+    const TARGET_TIME = new Date("2026-01-31T21:00:00+07:00").getTime();
+    const REDIRECT_URL = "http://google.com";
 
-        if (Date.now() >= TARGET_TIME) {
-            // ĐÃ QUÁ GIỜ → CHUYỂN NGAY, KHÔNG RENDER UI
-            window.location.replace(REDIRECT_URL);
-        } else {
-            // CHƯA TỚI GIỜ → CHO PHÉP HIỂN THỊ
+    let serverNow = null;
+    let clientStart = Date.now();
+
+    async function getServerTime() {
+        const res = await fetch(
+            "https://worldtimeapi.org/api/timezone/Asia/Ho_Chi_Minh",
+            { cache: "no-store" }
+        );
+        const data = await res.json();
+        return new Date(data.datetime).getTime();
+    }
+
+    (async function init() {
+        try {
+            serverNow = await getServerTime();
+
+            if (serverNow >= TARGET_TIME) {
+                window.location.replace(REDIRECT_URL);
+                return;
+            }
+
             document.addEventListener("DOMContentLoaded", () => {
                 document.body.style.visibility = "visible";
                 document.body.style.opacity = "1";
             });
+
+        } catch (e) {
+            // fallback: nếu API lỗi → chặn truy cập
+            alert("Không thể đồng bộ thời gian hệ thống. Vui lòng thử lại sau.");
         }
-    </script>
+    })();
+</script>
+
 </head>
 
 <body>
@@ -181,4 +203,5 @@
 
 </body>
 </html>
+
 
