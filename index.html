@@ -13,7 +13,8 @@
             --text-main: #e6eaf0;
             --text-sub: #9aa4b2;
 
-            --led-blue: #00bfff;
+            --glow-red: #ff2a2a;
+            --glow-white: #ffffff;
         }
 
         /* FULL DARK BACKGROUND */
@@ -24,37 +25,44 @@
             min-height: 100vh;
 
             display: flex;
-            align-items: center;
+            align-items: stretch;
             justify-content: center;
         }
 
+        /* WRAPPER FULL CHIỀU DỌC */
         .wrapper {
             background: var(--card-bg);
-            width: 90%;
-            max-width: 420px;
-            padding: 34px 26px;
-            border-radius: 16px;
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+
+            padding: 40px 26px;
             text-align: center;
 
-            border: 1px solid var(--border-soft);
-            box-shadow: 0 0 30px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            border-left: 1px solid var(--border-soft);
+            border-right: 1px solid var(--border-soft);
         }
 
-        /* LOGO LED XANH */
+        /* LOGO PHÁT SÁNG TRẮNG + ĐỎ */
         .logo img {
             max-width: 110px;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
 
             filter:
-                drop-shadow(0 0 6px rgba(0,191,255,0.8))
-                drop-shadow(0 0 14px rgba(0,191,255,0.6))
-                drop-shadow(0 0 28px rgba(0,191,255,0.4));
+                drop-shadow(0 0 6px rgba(255,255,255,0.7))
+                drop-shadow(0 0 14px rgba(255,255,255,0.45))
+                drop-shadow(0 0 10px rgba(255,42,42,0.7))
+                drop-shadow(0 0 26px rgba(255,42,42,0.45));
         }
 
         h1 {
             color: var(--text-main);
             font-size: 17px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             text-transform: uppercase;
             line-height: 1.45;
             letter-spacing: 0.6px;
@@ -63,7 +71,7 @@
         .info-text {
             font-size: 14.5px;
             color: var(--text-sub);
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             line-height: 1.6;
         }
 
@@ -102,6 +110,10 @@
         }
 
         @media (max-width: 480px) {
+            .wrapper {
+                padding: 32px 18px;
+            }
+
             .time-value {
                 font-size: 20px;
             }
@@ -119,7 +131,7 @@
     <h1>KHẢO SÁT GÓP Ý TIỆC TẤT NIÊN</h1>
 
     <div class="info-text">
-        Thời gian thực hiện khảo sát sau 21:00, anh/chị vui thực hiện khảo sát sau thời gian này.
+        Kính mong Anh/Chị vui lòng chờ đến thời điểm khảo sát được mở để tiếp tục thực hiện.
     </div>
 
     <div class="timer-box">
@@ -174,4 +186,3 @@
 
 </body>
 </html>
-
