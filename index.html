@@ -19,13 +19,11 @@
             font-family: Arial, Helvetica, sans-serif;
             background: var(--bg-main);
             min-height: 100vh;
-
             display: flex;
             justify-content: center;
             overflow-y: hidden;
         }
 
-        /* WRAPPER FULL CHIỀU DỌC */
         .wrapper {
             width: 100%;
             max-width: 480px;
@@ -43,11 +41,9 @@
             border-right: 1px solid var(--border-soft);
         }
 
-        /* LOGO PHÁT SÁNG TRẮNG DỊU */
         .logo img {
             max-width: 110px;
             margin-bottom: 24px;
-
             filter:
                 drop-shadow(0 0 4px rgba(255,255,255,0.35))
                 drop-shadow(0 0 10px rgba(255,255,255,0.22));
@@ -104,7 +100,6 @@
             color: #7f8896;
         }
 
-        /* NÚT BẮT ĐẦU KHẢO SÁT (CHO iPHONE) */
         #startSurvey {
             display: none;
             margin-top: 26px;
@@ -113,20 +108,9 @@
             border-radius: 12px;
             border: none;
             cursor: pointer;
-
             background: #ffffff;
             color: #000000;
             font-weight: 600;
-        }
-
-        @media (max-width: 480px) {
-            .wrapper {
-                padding: 32px 18px;
-            }
-
-            .time-value {
-                font-size: 20px;
-            }
         }
     </style>
 </head>
@@ -140,13 +124,12 @@
 
     <h1>KHẢO SÁT GÓP Ý TIỆC TẤT NIÊN</h1>
 
-    <div class="info-text">
-        Thời gian thực hiện khảo sát sau 21 giờ, anh chị vui lòng qua lại sau thời gian này.
+    <div class="info-text" id="infoText">
+        Thời gian thực hiện khảo sát sau 21 giờ, anh/chị vui lòng quay lại sau thời gian này.
     </div>
 
-    <div class="timer-box">
+    <div class="timer-box" id="timerBox">
         <div class="timer-label">Thời gian còn lại</div>
-
         <div class="timer">
             <div class="time-unit">
                 <div class="time-value" id="hours">00</div>
@@ -173,7 +156,6 @@
 <script>
     const TARGET_TIME = new Date("2026-01-30T21:25:00+07:00").getTime();
     const REDIRECT_URL = "https://forms.gle/HN4UzvRLvCPeBmFK8";
-
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
     function updateTimer() {
@@ -181,6 +163,9 @@
 
         if (diff <= 0) {
             if (isIOS) {
+                document.getElementById("infoText").textContent =
+                    "Cảm ơn anh/chị đã tham gia sự kiện này";
+                document.getElementById("timerBox").style.display = "none";
                 document.getElementById("startSurvey").style.display = "block";
             } else {
                 window.location.replace(REDIRECT_URL);
@@ -208,6 +193,3 @@
 
 </body>
 </html>
-
-
-
